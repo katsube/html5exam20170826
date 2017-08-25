@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Hello A-FRAME</title>
+	<script src="js/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+		<a-box position="0 5 -5" rotation="0 45 45" scale="2 2 2" color="#EF2D5E">
+			<a-animation attribute="position" to="0 -4 -5" direction="alternate" dur="3000"repeat="indefinite"></a-animation>
+
+		    <a-animation attribute="scale" begin="mouseenter" dur="300" to="5 5 5"></a-animation>
+    		<a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
+		</a-box>
+
+		<a-camera>
+			<a-cursor></a-cursor>
+		</a-camera>
+	</a-scene>
+</body>
+</html>

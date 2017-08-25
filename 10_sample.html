@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Hello A-FRAME</title>
+	<script src="js/aframe.min.js"></script>
+</head>
+<body>
+
+<a-scene>
+	<a-assets>
+		<audio id="seclick"   src="sound/click.ogg" preload></audio>
+		<img   id="citybg"    src="img/bg360_city.jpg">
+		<img   id="cubesbg"   src="img/bg360_cubes.jpg">
+		<img   id="secheltbg" src="img/bg360_sechelt.jpg">
+	</a-assets>
+
+	<a-box      id="box"      class="btn-selector" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+	<a-sphere   id="sphere"   class="btn-selector" position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+	<a-cylinder id="cylinder" class="btn-selector" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+
+	<a-sky id="sky" src="#citybg"></a-sky>
+
+	<a-camera>
+		<a-cursor id="cursor" fuse="true" fuseTimeout="1500"></a-cursor>
+	</a-camera>
+</a-scene>
+
+<script>
+	var currentbg = "sphere";
+
+	var btnEl     = document.querySelectorAll('.btn-selector');
+	var skyEl     = document.querySelector('#sky');
+	var cursorEl  = document.querySelector('#cursor');
+	var seclickEl = document.querySelector('#seclick');
+
+	/**
+	 * カーソルの色とサイズを変更する
+	 */
+	var changeRing = function(color, opt_size){
+		var size = opt_size || "normal";
+		var geometrys = {
+				"normal": "primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+			, "big": "primitive: ring; radiusInner: 0.03; radiusOuter: 0.04"
+		};
+
+		cursorEl.setAttribute("material", "color: "+ color);   //色変更
+		cursorEl.setAttribute("geometry", geometrys[size]);    //サイズ変更
+	};
+  
+	/**
+	 * 背景画像を変更する
+	 */
+	 var changeBG = function(id){
+		 skyEl.setAttribute('src', id);
+		 seclickEl.play();
+	};
+
+	//-------------------------------------
+	// イベント処理
+	//-------------------------------------
+	with(btnEl){
+		//-------------------
+		// クリック (選択)
+		//-------------------
+		addEventListener('click', function (e) {
+			var id = e.target.id;
+
+			// 現在の背景と異なる場合のみ変更する
+			if( id !== currentbg ){
+				if(id === "box")           changeBG("#cubesbg");
+				else if(id === "sphere")   changeBG("#citybg");
+				else if(id === "cylinder") changeBG("#secheltbg");
+				
+				changeRing("green", "big");
+				currentbg = id;
+			}
+		});
+		//-------------------
+		// カーソルが乗った
+		//-------------------
+		addEventListener('mouseenter', function () {
+			changeRing("red", "big");
+		});
+		//-------------------
+		// カーソルが離れた
+		//-------------------
+		addEventListener('mouseleave', function () {
+			changeRing("black", "normal");
+		});
+	}
+</script>
+
+</body>
+</html>

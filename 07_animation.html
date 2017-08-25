@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Hello A-FRAME</title>
+	<script src="js/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+		<!-- 立方体/球/円柱 -->
+		<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9">
+			<!-- アニメーションを追加 -->
+			<a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000" repeat="indefinite">
+				<!-- 
+					位置を変更するアニメーション (attribute="position")
+					座標0 2 -5〜0 2.2 -5を交互に移動する (to="0 2.2 -5" direction="alternate")
+					2000ミリ秒で (dur="2000")
+					永遠に (repeat="indefinite")
+				-->
+			</a-animation>			
+		</a-box>
+	</a-scene>
+</body>
+</html>

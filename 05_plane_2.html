@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Hello A-FRAME</title>
+	<script src="js/aframe.min.js"></script>
+</head>
+<body>
+	<a-scene>
+		<!-- アセット(素材)を先に読み込む -->
+		<a-assets>
+			<img id="cylTexture" src="img/texture_box.jpg">
+			<img id="skyTexture" src="img/bg360_sechelt.jpg">
+			<img id="groundTexture" src="img/texture_floor.jpg">
+		</a-assets>
+
+		<!-- 立方体/球/円柱 -->
+		<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+		<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+
+		<!-- ↓円柱にテクスチャを貼る↓ -->
+		<a-cylinder
+			src="#cylTexture"
+			position="1 0.75 -3" rotation="0 45 45" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+
+		<!-- 地面 -->
+		<a-plane src="#groundTexture" repeat="10 10" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+	
+		<!-- 空(空間) -->
+		<a-sky src="#skyTexture" color="#ECECEC"></a-sky>
+	</a-scene>
+</body>
+</html>
